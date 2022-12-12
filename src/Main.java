@@ -4,17 +4,14 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, SQLException {
-        String fileName;
         // Create a FoodVendor object
         FoodVendor vendor = new FoodVendor();
-        fileName = vendor.scnr.next();   // User input "vendor.db" as database file name.
+        String fileName = vendor.scnr.next();   // User input "vendor.db" as database file name.
         vendor.initialize(fileName);
 
         /* Part 1 of Milestone 1 */
-
         // Test if database named vendor.db is created successfully. You can use any SQL tool to view this file.
-        File tempFile = new File(fileName);
-        if(tempFile.exists()) {
+        if(new File(fileName).exists()) {
             System.out.println("Database file (vendor.db) created successfully.");
         }
 

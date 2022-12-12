@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.stream.Stream;
 
 public class DbManager {
     // A Connection object being used throughout the program
@@ -81,7 +81,7 @@ public class DbManager {
         return this.queries.get(fileName).readFile();
     }
 
-    public boolean initialize(String fileName) throws IOException, SQLException {
+    public boolean initialize(String fileName) {
         try {
             this.connect(fileName);
             this.createMenuTable("menu");
@@ -103,7 +103,9 @@ public class DbManager {
     }
 
     public void insertMenu(String category, String itemName, String description, double price, int time, int availability) throws IOException, SQLException {
-        this.prepare("insert-menu-table", category, itemName, description, price, time, availability).execute();
+        try(PreparedStatement statement = this.prepare("insert-menu-table", category, itemName, description, price, time, availability)) {
+            statement.execute();
+        }
     }
 
     public void insertUser(User user) throws IOException, SQLException {
@@ -125,7 +127,9 @@ public class DbManager {
     }
 
     public void insertUser(String userName, String account, String firstName, String lastName, String email, String phoneNum, String password, String emId, String cardNum, String cardDate, String address, int points, int history) throws IOException, SQLException {
-        this.prepare("insert-user-table", userName, account, firstName, lastName, email, phoneNum, password, emId, cardNum, cardDate, address, points, history).execute();
+        try(PreparedStatement statement = this.prepare("insert-user-table", userName, account, firstName, lastName, email, phoneNum, password, emId, cardNum, cardDate, address, points, history)) {
+            statement.execute();
+        }
     }
 
     private PreparedStatement prepare(String query, Object ...args) throws IOException, SQLException {
@@ -140,8 +144,13 @@ public class DbManager {
             int index = position + 1;
             Object obj = args[position];
             switch(obj) {
+                case Boolean b -> statement.setBoolean(index, b);
+                case Date dt -> statement.setDate(index, (java.sql.Date)dt);
                 case Double d -> statement.setDouble(index, d);
+                case Float f -> statement.setFloat(index, f);
                 case Integer i -> statement.setInt(index, i);
+                case Long l -> statement.setLong(index, l);
+                case Short sh -> statement.setShort(index, sh);
                 case String s -> statement.setString(index, s);
                 default -> statement.setNull(index, Types.NULL);
             }

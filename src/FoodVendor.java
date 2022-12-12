@@ -12,12 +12,11 @@ public class FoodVendor {
         // Connect to the database file
         db = new DbManager();
         if (db.connect(fName)) {
-            System.out.println("Connection to " + fName + " is successful.");
+            System.out.printf("Connection to %s is successful.%n", fName);
         }
 
         // Initialize the database if necessary
-        File file = new File(fName);
-        if (!file.exists()) {
+        if (!(new File(fName)).exists()) {
             if (db.initialize(fName)) {
                 System.out.printf("Initialization of %s is successful.%n", fName);
             }
