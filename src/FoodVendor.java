@@ -1,12 +1,13 @@
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class FoodVendor {
-    private DbManager db = null;
-    private final Scanner scnr = new Scanner(System.in);
+    public DbManager db = null;
+    public final Scanner scnr = new Scanner(System.in);
 
-    public void initialize(String fName) throws IOException {
+    public void initialize(String fName) throws IOException, SQLException {
         /* TODO: impletement your method here. */
         // Connect to the database file
         db = new DbManager();

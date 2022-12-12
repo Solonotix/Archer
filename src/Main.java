@@ -1,13 +1,9 @@
 import java.io.File;
-import java.util.*;
+import java.sql.SQLException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws IOException  {
+    public static void main(String[] args) throws IOException, SQLException {
         String fileName;
         // Create a FoodVendor object
         FoodVendor vendor = new FoodVendor();
