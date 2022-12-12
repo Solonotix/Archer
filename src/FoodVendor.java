@@ -19,8 +19,7 @@ public class FoodVendor {
         File file = new File(fName);
         if (!file.exists()) {
             if (db.initialize(fName)) {
-                System.out.println("Initialization of " + fName
-                        + " is successful.");
+                System.out.printf("Initialization of %s is successful.%n", fName);
             }
             else {
                 System.out.println("Error initializing the database.");

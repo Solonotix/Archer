@@ -103,7 +103,7 @@ public class DbManager {
     }
 
     public void insertMenu(String category, String itemName, String description, double price, int time, int availability) throws IOException, SQLException {
-        this.prepare("insert-menu", category, itemName, description, price, time, availability).execute();
+        this.prepare("insert-menu-table", category, itemName, description, price, time, availability).execute();
     }
 
     public void insertUser(User user) throws IOException, SQLException {
@@ -125,12 +125,13 @@ public class DbManager {
     }
 
     public void insertUser(String userName, String account, String firstName, String lastName, String email, String phoneNum, String password, String emId, String cardNum, String cardDate, String address, int points, int history) throws IOException, SQLException {
-        this.prepare("insert-user", userName, account, firstName, lastName, email, phoneNum, password, emId, cardNum, cardDate, address, points, history).execute();
+        this.prepare("insert-user-table", userName, account, firstName, lastName, email, phoneNum, password, emId, cardNum, cardDate, address, points, history).execute();
     }
 
     private PreparedStatement prepare(String query, Object ...args) throws IOException, SQLException {
         if(this.queries.containsKey(query)) {
             query = this.getQuery(query);
+            System.out.printf("PreparedStatement(lookup) => %s%n", query);
         }
 
         PreparedStatement statement = conn.prepareStatement(query);
@@ -146,6 +147,7 @@ public class DbManager {
             }
         }
 
+        System.out.printf("PreparedStatement(end) => %s%n", statement);
         return statement;
     }
 }

@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS user
     (
-    id int not null PRIMARY KEY,
+    id integer not null PRIMARY KEY AUTOINCREMENT,
     user_name text not null UNIQUE,
     account_type text null,
     first_name text null,
@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS user
     credit_card_number text null,
     credit_card_exp_date text null,
     billing_address text null,
-    reward_points int not null default(0),
-    order_history int not null default(0)
+    reward_points integer not null default(0),
+    order_history integer not null default(0)
     );
