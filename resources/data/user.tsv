@@ -1,3 +1,3 @@
-user_name	account_type	first_name	last_name	email	phone_number	password	employee_id credit_card_number	credit_card_exp_date	billing_address reward_points	order_history
-user1	default	sam smith	sam.smith@yahoo.com 	555-5212	unsalted-password	E012	4001223000121453	01/26	123 Main St 	15	750
-user2	custom	taylor johnson	tay.johns@outlook.com 	555-5112	dont-save-passwords	T125	500922300131853	01/26	754 Peach St 	70	90
+user_name	account_type	first_name	last_name	email	phone_number	password	employee_id	credit_card_number	credit_card_exp_date	billing_address	reward_points	order_history
+user1	default	sam	smith	sam.smith@yahoo.com 	555-5212	unsalted-password	E012	4001223000121453	01/26	123 Main St 	15	750
+user2	custom	taylor	johnson	tay.johns@outlook.com 	555-5112	dont-save-passwords	T125	500922300131853	01/26	754 Peach St 	70	90
