@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Arrays;
@@ -64,6 +65,23 @@ public class DbManager {
             this.conn.close();
         }
         this.conn = null;
+    }
+
+    public Admin getAdmin(String userName) {
+        try(PreparedStatement statement = this.prepare("get-admin-user", userName)) {
+            ResultSet results = statement.executeQuery();
+            if(results.first()) {
+                return Admin.fromResultSet(results);
+            }
+        }
+        catch(IOException io) {
+            System.out.printf("Unable to resolve PreparedStatement get-admin-user.%n%s%n", io);
+        }
+        catch(SQLException sql) {
+            System.out.printf("Unable to resolve ResultSet from PreparedStatement in getAdmin().%n%s%n", sql);
+        }
+
+        return new Admin();
     }
 
     private String[] getDelimitedFile(String fileName, String delimiter, boolean hasHeader) throws IOException {

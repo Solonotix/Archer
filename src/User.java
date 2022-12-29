@@ -1,3 +1,6 @@
+import java.sql.SQLException;
+import java.sql.ResultSet;
+
 public class User {
     private Integer id;
     private String userName;
@@ -88,6 +91,31 @@ public class User {
     public User(String username, String firstName, String lastName, String accountType, String email, String billingAddress, String phoneNumber, String employeeId, String password, String creditCardNumber, String creditCardExpDate, Integer rewardPoints, Integer orderHistory) {
         this(username, firstName, lastName, accountType, email, billingAddress, phoneNumber, employeeId, password, creditCardNumber, creditCardExpDate, rewardPoints);
         this.orderHistory = orderHistory;
+    }
+
+    public static User fromResultSet(ResultSet row) {
+        User user = new User("default");
+
+        try {
+            user.userName = row.getString("user_name");
+            user.accountType = row.getString("account_type");
+            user.firstName = row.getString("first_name");
+            user.lastName = row.getString("last_name");
+            user.email = row.getString("email");
+            user.phoneNumber = row.getString("phone_number");
+            user.password = row.getString("password");
+            user.employeeId = row.getString("employee_id");
+            user.creditCardNumber = row.getString("credit_card_number");
+            user.creditCardExpDate = row.getString("credit_card_exp_date");
+            user.billingAddress = row.getString("billing_address");
+            user.rewardPoints = row.getInt("reward_points");
+            user.orderHistory = row.getInt("order_history");
+        }
+        catch(SQLException sql) {
+            System.out.printf("Failed to build User from ResultSet.%n%s%n", sql);
+        }
+
+        return user;
     }
 
     public static User fromRow(String row) {
